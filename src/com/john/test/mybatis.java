@@ -67,8 +67,8 @@ public class mybatis {
 
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         User user = new User(null, 1, "zhangsan", "aa@gmail.com", "john");
-        boolean b = mapper.addUser(user);
-        System.out.println(b);
+        Integer count = mapper.addUser(user);
+        System.out.println(user.getId());
         sqlSession.commit();
     }
 
@@ -91,5 +91,15 @@ public class mybatis {
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         mapper.deleteUser(6);
         sqlSession.commit();
+    }
+
+    @Test
+    public void testSelectParam() {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        User zhangsan = mapper.getUserByIdAndName1(8, "zhangsan");
+        System.out.println(zhangsan);
     }
 }
