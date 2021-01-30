@@ -11,6 +11,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class mybatis {
     /**
@@ -99,7 +101,16 @@ public class mybatis {
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-        User zhangsan = mapper.getUserByIdAndName1(8, "zhangsan");
+        //User zhangsan = mapper.getUserByIdAndName1(8, "zhangsan");
+       /* User user = new User();
+        user.setId(8);
+        user.setName("zhangsan");
+        User zhangsan = mapper.getUser(user);*/
+
+        Map<String, String> map = new HashMap<>();
+        map.put("id", "8");
+        map.put("name", "zhangsan");
+        User zhangsan = mapper.getUserByMap(map);
         System.out.println(zhangsan);
     }
 }

@@ -15,6 +15,28 @@
         where id = #{id}
           and name = #{name}
     </select>
+    <select id="getUser" parameterType="user" resultType="user">
+        select *
+        from test_user
+        where id = #{id}
+          and name = #{name}
+    </select>
+    <select id="getUserByIds" parameterType="list" resultType="user">
+        select *
+        from test_user
+        where id in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+    <select id="getUserByMap" parameterType="map" resultType="user">
+        select *
+        from test_user
+        where id = #{id}
+          and name = #{name}
+    </select>
 
     <select id="getUserById" resultType="user" databaseId="">
         select *
