@@ -59,4 +59,37 @@ public class mybatis {
         User userById = mapper.getUserById(1);
         System.out.println(userById);
     }
+
+    @Test
+    public void testAdd() {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        User user = new User(null, 1, "zhangsan", "aa@gmail.com", "john");
+        boolean b = mapper.addUser(user);
+        System.out.println(b);
+        sqlSession.commit();
+    }
+
+    @Test
+    public void testUpdate() {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        User user = new User(6, 1, "zhangsan1", "aa@gmail1.com", "john");
+        mapper.updateUser(user);
+        sqlSession.commit();
+    }
+
+    @Test
+    public void testDelete() {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        mapper.deleteUser(6);
+        sqlSession.commit();
+    }
 }

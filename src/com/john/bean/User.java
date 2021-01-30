@@ -7,6 +7,17 @@ public class User {
     private String email;
     private String lastName;
 
+    public User(Integer id, Integer gender, String name, String email, String lastName) {
+        this.id = id;
+        this.gender = gender;
+        this.name = name;
+        this.email = email;
+        this.lastName = lastName;
+    }
+
+    public User() {
+    }
+
     public Integer getId() {
         return id;
     }

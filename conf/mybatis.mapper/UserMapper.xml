@@ -8,4 +8,20 @@
         from test_user
         where id = #{id}
     </select>
+
+    <insert id="addUser" parameterType="com.john.bean.User">
+        insert into test_user(name, gender, email, last_name)
+        values (#{name}, #{gender}, #{email}, #{lastName})
+    </insert>
+    <update id="updateUser" parameterType="com.john.bean.User">
+        update test_user set
+        `gender` = #{gender},
+        `email` = #{email},
+        `last_name` = #{lastName}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from test_user where id = #{id}
+    </delete>
 </mapper>
