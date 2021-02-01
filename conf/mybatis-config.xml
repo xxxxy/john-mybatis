@@ -6,6 +6,7 @@
     <properties resource="db.properties"/>
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+            <!--<setting name="jdbcTypeForNull" value="NULL"/>-->
     </settings>
     <typeAliases>
         <!--<typeAlias type="com.john.bean.User" alias="user"/>-->
@@ -42,6 +43,7 @@
     </databaseIdProvider>
     <mappers>
         <mapper resource="mybatis.mapper/UserMapper.xml"/>
+        <mapper resource="mybatis.mapper/UserMapperExt.xml"/>
         <!--<mapper class="com.john.mapper.UserMapperAnnotation"/>-->
     </mappers>
 </configuration>

@@ -3,6 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.john.mapper.UserMapper">
+    <select id="getUserMapByLastName" parameterType="string" resultType="user">
+        select * from test_user where last_name = #{lastName}
+    </select>
+    <select id="getUserListByLastName" parameterType="string" resultType="user">
+        select * from test_user where last_name = #{lastName}
+    </select>
     <select id="getUserByIdAndName" resultType="user">
         select *
         from test_user
@@ -12,7 +18,7 @@
     <select id="getUserByIdAndName1" resultType="user">
         select *
         from test_user
-        where id = #{id}
+        where id = ${id}
           and name = #{name}
     </select>
     <select id="getUser" parameterType="user" resultType="user">

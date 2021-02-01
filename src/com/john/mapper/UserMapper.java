@@ -1,12 +1,18 @@
 package com.john.mapper;
 
 import com.john.bean.User;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
 
 public interface UserMapper {
+
+    @MapKey("id")
+    public Map<Integer, User> getUserMapByLastName(String lastName);
+
+    public List<User> getUserListByLastName(String lastName);
 
     public User getUserByIdAndName(Integer id, String name);
 
