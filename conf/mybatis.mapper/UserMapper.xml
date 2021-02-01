@@ -56,8 +56,8 @@
         </selectKey>
         <!--insert into test_user(id, name, gender, email, last_name)
         values (#{id}, #{name}, #{gender}, #{email}, #{lastName})-->
-        insert into test_user(id, name, gender, email, last_name)
-        values (seq.nextval, #{name}, #{gender}, #{email}, #{lastName})
+<!--        insert into test_user(id, name, gender, email, last_name)
+        values (seq.nextval, #{name}, #{gender}, #{email}, #{lastName})-->
     </insert>
     <update id="updateUser" parameterType="com.john.bean.User">
         update test_user
