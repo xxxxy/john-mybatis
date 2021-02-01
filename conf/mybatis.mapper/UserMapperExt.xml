@@ -11,6 +11,6 @@
         <result column="email" property="email"/>
     </resultMap>
     <select id="getById" resultMap="MyUser" parameterType="int">
-        select * from test_user where id = #{id}
+        select * from user where id = #{id}
     </select>
 </mapper>

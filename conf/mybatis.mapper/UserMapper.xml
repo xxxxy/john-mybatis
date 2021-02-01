@@ -4,32 +4,32 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.john.mapper.UserMapper">
     <select id="getUserMapByLastName" parameterType="string" resultType="user">
-        select * from test_user where last_name = #{lastName}
+        select * from user where last_name = #{lastName}
     </select>
     <select id="getUserListByLastName" parameterType="string" resultType="user">
-        select * from test_user where last_name = #{lastName}
+        select * from user where last_name = #{lastName}
     </select>
     <select id="getUserByIdAndName" resultType="user">
         select *
-        from test_user
+        from user
         where id = #{param1}
           and name = #{param2}
     </select>
     <select id="getUserByIdAndName1" resultType="user">
         select *
-        from test_user
+        from user
         where id = ${id}
           and name = #{name}
     </select>
     <select id="getUser" parameterType="user" resultType="user">
         select *
-        from test_user
+        from user
         where id = #{id}
           and name = #{name}
     </select>
     <select id="getUserByIds" parameterType="list" resultType="user">
         select *
-        from test_user
+        from user
         where id in
         <foreach collection="list" item="item" open="(" separator="," close=")">
             #{item}
@@ -39,19 +39,19 @@
 
     <select id="getUserByMap" parameterType="map" resultType="user">
         select *
-        from test_user
+        from user
         where id = #{id}
           and name = #{name}
     </select>
 
     <select id="getUserById" resultType="user" databaseId="">
         select *
-        from test_user
+        from user
         where id = #{id}
     </select>
 
     <insert id="addUser" parameterType="com.john.bean.User" useGeneratedKeys="true" keyProperty="id">
-        insert into test_user(name, gender, email, last_name)
+        insert into user(name, gender, email, last_name)
         values (#{name}, #{gender}, #{email}, #{lastName})
     </insert>
 
@@ -60,13 +60,13 @@
             <!--BEFORE  select seq.nextval from dual-->
             <!--AFTER   select seq.currval from dual-->
         </selectKey>
-        <!--insert into test_user(id, name, gender, email, last_name)
+        <!--insert into user(id, name, gender, email, last_name)
         values (#{id}, #{name}, #{gender}, #{email}, #{lastName})-->
-<!--        insert into test_user(id, name, gender, email, last_name)
+<!--        insert into user(id, name, gender, email, last_name)
         values (seq.nextval, #{name}, #{gender}, #{email}, #{lastName})-->
     </insert>
     <update id="updateUser" parameterType="com.john.bean.User">
-        update test_user
+        update user
         set `gender`    = #{gender},
             `email`     = #{email},
             `last_name` = #{lastName}
@@ -75,7 +75,7 @@
 
     <delete id="deleteUser" parameterType="int">
         delete
-        from test_user
+        from user
         where id = #{id}
     </delete>
 </mapper>
