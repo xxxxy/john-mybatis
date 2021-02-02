@@ -13,4 +13,55 @@
     <select id="getById" resultMap="MyUser" parameterType="int">
         select * from user where id = #{id}
     </select>
+
+    <resultMap id="withDeptResultMap" type="com.john.bean.User">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="email" property="email"/>
+        <result column="last_name" property="lastName"/>
+        <result column="gender" property="gender"/>
+        <result column="deptId" property="department.id"/>
+        <result column="deptName" property="department.name"/>
+    </resultMap>
+    <resultMap id="withDeptResultMap2" type="com.john.bean.User">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="email" property="email"/>
+        <result column="last_name" property="lastName"/>
+        <result column="gender" property="gender"/>
+        <!--<result column="deptId" property="department.id"/>
+        <result column="deptName" property="department.name"/>-->
+        <association property="department" javaType="com.john.bean.Department">
+            <id column="deptId" property="id"/>
+            <result column="deptName" property="name"/>
+        </association>
+    </resultMap>
+    <select id="getUserWithDept" resultMap="withDeptResultMap">
+        select u.id, u.name, u.last_name, u.gender, u.email, d.name deptName, d.id deptId
+        from user u,
+             dept d
+        where u.dept_id = d.id
+          and u.id = #{id}
+    </select>
+
+    <resultMap id="getByIdStepResultMap" type="com.john.bean.User">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="email" property="email"/>
+        <result column="last_name" property="lastName"/>
+        <result column="gender" property="gender"/>
+        <association property="department" select="com.john.mapper.DepartmentMapper.getDepartment" column="dept_id">
+        </association>
+    </resultMap>
+    <select id="getByIdStep" resultMap="getByIdStepResultMap">
+        select u.id, u.name, u.last_name, u.gender, u.email, u.dept_id
+        from user u
+        where u.id = #{id}
+    </select>
+
+    <select id="getUsersByDeptId" resultType="com.john.bean.User">
+        select id, name, email, last_name, gender, dept_id from user
+        where dept_id = #{deptId}
+    </select>
+
 </mapper>

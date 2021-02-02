@@ -6,6 +6,22 @@ public class User {
     private String name;
     private String email;
     private String lastName;
+    private Department department;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", gender=" + gender +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", department=" + department +
+                '}';
+    }
+
+    public User() {
+    }
 
     public User(Integer id, Integer gender, String name, String email, String lastName) {
         this.id = id;
@@ -13,9 +29,6 @@ public class User {
         this.name = name;
         this.email = email;
         this.lastName = lastName;
-    }
-
-    public User() {
     }
 
     public Integer getId() {
@@ -58,14 +71,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", gender=" + gender +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
