@@ -6,10 +6,10 @@
     <select id="getUserByCondition" resultType="com.john.bean.User">
         select *
         from user
-        <if test="_parameter != null">
+       <!-- <if test="_parameter != null">
             where last_name = #{lastName}
         </if>
-        <bind name="_lastname" value="'%' + lastName + '%'"/>
+        <bind name="_lastname" value="'%' + lastName + '%'"/>-->
         <where>
             <if test="id != null">
                 and id = #{id}
