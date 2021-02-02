@@ -2,10 +2,7 @@ package com.john.test;
 
 import com.john.bean.Department;
 import com.john.bean.User;
-import com.john.mapper.DepartmentMapper;
-import com.john.mapper.UserMapper;
-import com.john.mapper.UserMapperAnnotation;
-import com.john.mapper.UserMapperExt;
+import com.john.mapper.*;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -14,6 +11,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class MybatisExt {
@@ -48,5 +47,23 @@ public class MybatisExt {
         DepartmentMapper mapper = sqlSession.getMapper(DepartmentMapper.class);
         Department departmentPlus = mapper.getDepartmentStep(1);
         System.out.println(departmentPlus.getName());
+    }
+
+    @Test
+    public void testDynamic() {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        UserDynamicMapper mapper = sqlSession.getMapper(UserDynamicMapper.class);
+        User user = new User(null,0, "zhangsan2","john@email2.com", "test" ,new Department(1));
+        User user2 = new User(null,0, "zhangsan3","john@email3.com", "test" ,new Department(2));
+
+        //User userByCondition = mapper.getUserByCondition(user);
+        //User userByCondition = mapper.getUserByCondition3(user);
+        //Integer integer = mapper.updateUserByCondition(user);
+        //List<User> userList = mapper.getUsersByIds(Arrays.asList(7, 8, 9));
+
+        Integer integer = mapper.batchSaveUsers(Arrays.asList(user, user2));
+        System.out.println(integer);
     }
 }

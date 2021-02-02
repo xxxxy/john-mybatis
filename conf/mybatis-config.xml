@@ -48,6 +48,7 @@
         <mapper resource="mybatis.mapper/UserMapper.xml"/>
         <mapper resource="mybatis.mapper/UserMapperExt.xml"/>
         <mapper resource="mybatis.mapper/DepartmentMapper.xml"/>
+        <mapper resource="mybatis.mapper/UserDynamicMapper.xml"/>
         <!--<mapper class="com.john.mapper.UserMapperAnnotation"/>-->
     </mappers>
 </configuration>

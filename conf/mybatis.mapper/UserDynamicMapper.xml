@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.john.mapper.UserDynamicMapper">
+    <select id="getUserByCondition" resultType="com.john.bean.User">
+        select *
+        from user
+        <if test="_parameter != null">
+            where last_name = #{lastName}
+        </if>
+        <bind name="_lastname" value="'%' + lastName + '%'"/>
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="lastName != null and lastName != ''">
+                and last_name like concat('%', #{lastName})
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="gender == 0 or gender == 1">
+                and gender = #{gender}
+            </if>
+        </where>
+    </select>
+    <select id="getUserByCondition2" resultType="com.john.bean.User">
+        select *
+        from user
+        <trim prefix="where" suffixOverrides="and">
+            <if test="id != null">
+                id = #{id}
+                        and
+            </if>
+            <if test="lastName != null and lastName != ''">
+                last_name like concat('%', #{lastName})
+                        and
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name}
+                        and
+            </if>
+            <if test="gender == 0 or gender == 1">
+                gender = #{gender}
+                        and
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email,jdbcType=VARCHAR} and
+            </if>
+        </trim>
+    </select>
+    <select id="getUserByCondition3" resultType="com.john.bean.User">
+        select *
+        from user
+        <where>
+            <choose>
+                <when test="id != null">
+                    and id = #{id}
+                </when>
+                <when test="name != null and name != ''">
+                    and name = #{name}
+                </when>
+                <otherwise>
+                    and last_name = #{lastName}
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <update id="updateUserByCondition" parameterType="com.john.bean.User">
+        update user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+        </trim>
+        <!--<set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+        </set>-->
+        where id = #{id}
+    </update>
+
+    <select id="getUsersByIds" resultType="com.john.bean.User">
+        select *
+        from user where id in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <insert id="batchSaveUsers" >
+        insert into user(<include refid="selectSql"/>)
+        values
+        <foreach collection="users" item="user" separator=",">
+            (#{user.name,jdbcType=VARCHAR}, #{user.email,jdbcType=VARCHAR}, #{user.lastName,jdbcType=VARCHAR}, #{user.gender,jdbcType=INTEGER}, #{user.department.id})
+        </foreach>
+    </insert>
+
+    <sql id="selectSql">
+        name, email, last_name, gender, dept_id
+    </sql>
+</mapper>

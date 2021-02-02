@@ -10,6 +10,13 @@ public class Department {
     private String name;
     private List<User> userList;
 
+    public Department() {
+    }
+
+    public Department(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Department{" +

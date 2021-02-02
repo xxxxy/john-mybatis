@@ -23,6 +23,15 @@ public class User {
     public User() {
     }
 
+    public User(Integer id, Integer gender, String name, String email, String lastName, Department department) {
+        this.id = id;
+        this.gender = gender;
+        this.name = name;
+        this.email = email;
+        this.lastName = lastName;
+        this.department = department;
+    }
+
     public User(Integer id, Integer gender, String name, String email, String lastName) {
         this.id = id;
         this.gender = gender;
