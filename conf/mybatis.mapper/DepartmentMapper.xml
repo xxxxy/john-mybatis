@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.john.mapper.DepartmentMapper">
+    <cache-ref namespace="com.john.mapper.UserMapper"/>
     <select id="getDepartment" resultType="com.john.bean.Department">
         select id deptId, name
         from dept

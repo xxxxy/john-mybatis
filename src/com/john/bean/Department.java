@@ -1,11 +1,12 @@
 package com.john.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 部门表
  */
-public class Department {
+public class Department implements Serializable {
     private Integer id;
     private String name;
     private List<User> userList;

@@ -21,5 +21,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="slf4j-log4j12-1.6.2" level="project" />
+    <orderEntry type="library" name="mybatis-ehcache-1.0.3" level="project" />
   </component>
 </module>

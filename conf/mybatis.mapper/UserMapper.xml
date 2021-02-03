@@ -3,7 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.john.mapper.UserMapper">
-    <select id="getUserMapByLastName" parameterType="string" resultType="user">
+    <!--<cache eviction="FIFO" flushInterval="1000" readOnly="false" size="1024"/>-->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+    <select id="getUserMapByLastName" parameterType="string" resultType="user" useCache="false">
         select * from user where last_name = #{lastName}
     </select>
     <select id="getUserListByLastName" parameterType="string" resultType="user">
@@ -44,7 +46,7 @@
           and name = #{name}
     </select>
 
-    <select id="getUserById" resultType="user" databaseId="">
+    <select id="getUserById" resultType="user">
         select *
         from user
         where id = #{id}
@@ -55,7 +57,7 @@
         values (#{name}, #{gender}, #{email}, #{lastName})
     </insert>
 
-    <insert id="addUserForOracle" parameterType="com.john.bean.User">
+    <insert id="addUserForOracle" parameterType="com.john.bean.User" flushCache="true">
         <selectKey keyProperty="id" order="BEFORE" resultType="Integer">
             <!--BEFORE  select seq.nextval from dual-->
             <!--AFTER   select seq.currval from dual-->
